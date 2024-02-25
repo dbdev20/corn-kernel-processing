@@ -1,2 +1,15 @@
-# corn-kernel-processing
-Corn kernel image processing and analysis
+This was the midterm project for ECE 533, Image Processing, at UW-Madison with professor Sethares.
+We attained first
+This project was completed by myself and Keshav Sharan (https://github.com/Auc7us).
+
+In this project, our objective was, given a color image of kernels of corn on a black background, perform several image processing tasks to count the kernels, identify the apex and centroid, and classify each kernel based upon the color of the tip.
+
+For Problem 1, we used a multi-level processing approach, consisting of a preprocess across the entire image, and then a separate post-process exclusively on components of the image that were determined to represent multiple joint kernels. This post-process step consisted of using morphological operations to separate the kernels, and then re-assembling the image. This was instrumental to counting the kernels correctly, and finding the centroids and apexes. Finally, we simply counted the number of morphological components (above a certain minimum area threshold, relative to the median area) as determined that to be the count. Our approach performed well on the training images, attaining a correct count for 7/10 images, and off by one or two in the rest.
+
+For Problem 2, we took the post-processed images and performed some more processing on them to identify the centroid and apex. Identifying the centroid was straightforward, as this is built into ComponentMeasurements, but identifying the apex was more challenging. Our approach was to retrieve the ConvexVertices of each identified kernel, and then filter the ConvexVertices as to identify the single one with the highest average EuclideanDistance to all of the other ones. We found this approach was quite effective at determining the apex. In the ImageCollage result for P2, we see that the apex is identified properly in a substantial majority of cases.
+
+For Problem 3, our goal was to classify each kernel based on the color of its tip. We began by enhancing the image's contrast and converting it to grayscale to better distinguish between white and dark-tipped kernels. We identified a Region of Interest (ROI) near each kernel's apex, using an experimentally determined radius, for assessing the kernel tip color. A binary mask was created to highlight these ROIs, and we then calculated the mean pixel value within each ROI. Based on these values and predetermined thresholds, we categorized each kernel as having a red/dark tip, a white tip, or as ambiguous. The labels were then matched with the centroids of the relevant kernels, which required a bit of list manipulation. This approach allowed us to classify the kernels based on the color of their tips.
+
+The results of the project are in collage images below. We achieved rank 2 out of ~25 in the class for centroid identification, rank 1 out of ~25 for apex classification, and rank 13 out of ~25 for color classification.
+
+![counts](https://github.com/devinbresser/corn-kernel-processing/assets/66394890/76e35c6f-62f0-4694-a4b2-5534023f79b6)
