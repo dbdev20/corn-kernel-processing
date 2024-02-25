@@ -1,5 +1,4 @@
 This was the midterm project for ECE 533, Image Processing, at UW-Madison with professor Sethares.
-We attained first
 This project was completed by myself and Keshav Sharan (https://github.com/Auc7us).
 
 In this project, our objective was, given a color image of kernels of corn on a black background, perform several image processing tasks to count the kernels, identify the apex and centroid, and classify each kernel based upon the color of the tip.
